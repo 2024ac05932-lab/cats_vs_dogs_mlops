@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  cats-dogs-api:
+    image: rajanvesangi/cats-dogs-classifier:latest
+    container_name: cats-dogs-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models          # <-- add this line
+    restart: unless-stopped

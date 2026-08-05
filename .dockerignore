@@ -1,0 +1,10 @@
+data/
+mlruns/
+*.zip
+*.pyc
+__pycache__/
+.git/
+.gitignore
+README.md
+reports/
+venv/

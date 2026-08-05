@@ -1,0 +1,48 @@
+import kagglehub
+import os
+import shutil
+import zipfile
+
+print("🔽 Downloading Dogs vs Cats competition files...")
+path = kagglehub.competition_download('dogs-vs-cats')
+print(f"✅ Downloaded to: {path}")
+
+# Ensure data/raw/ exists
+os.makedirs("data/raw", exist_ok=True)
+
+# Copy the downloaded files to data/raw/
+for file in ["train.zip", "test1.zip", "sampleSubmission.csv"]:
+    src = os.path.join(path, file)
+    dst = os.path.join("data/raw", file)
+    if os.path.exists(src):
+        shutil.copy(src, dst)
+        print(f"Copied {file} to data/raw/")
+
+print("\n📦 Extracting train.zip...")
+train_zip = "data/raw/train.zip"
+if os.path.exists(train_zip):
+    with zipfile.ZipFile(train_zip, 'r') as zip_ref:
+        zip_ref.extractall("data/raw/")
+    print("Extracted train.zip")
+
+    # Organize into cat/dog folders
+    os.makedirs("data/raw/cat", exist_ok=True)
+    os.makedirs("data/raw/dog", exist_ok=True)
+
+    # Move files
+    import glob
+    for file in glob.glob("data/raw/train/cat.*.jpg"):
+        shutil.move(file, "data/raw/cat/")
+    for file in glob.glob("data/raw/train/dog.*.jpg"):
+        shutil.move(file, "data/raw/dog/")
+
+    # Remove empty train folder
+    os.rmdir("data/raw/train")
+
+    # Remove zip file to save space
+    os.remove(train_zip)
+    print("✅ Organized images into data/raw/cat/ and data/raw/dog/")
+else:
+    print("❌ train.zip not found – something went wrong.")
+
+print("\n🎉 Done! Dataset is ready.")

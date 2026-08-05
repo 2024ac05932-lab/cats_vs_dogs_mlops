@@ -1,0 +1,6 @@
+data/
+venv/
+*.zip
+*.h5
+*.pb
+mlruns/
