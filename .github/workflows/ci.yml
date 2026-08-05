@@ -53,30 +53,3 @@ jobs:
             rajanvesangi/cats-dogs-classifier:latest
             rajanvesangi/cats-dogs-classifier:${{ github.sha }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Copy docker-compose.yml to server via SCP
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          source: "docker-compose.yml"
-          target: "~/app/"
-
-      - name: Deploy container via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          script: |
-            cd ~/app
-            docker pull rajanvesangi/cats-dogs-classifier:latest
-            docker-compose up -d --force-recreate
