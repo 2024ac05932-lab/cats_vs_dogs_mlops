@@ -59,10 +59,10 @@ jobs:
           docker pull rajanvesangi/cats-dogs-classifier:latest
           docker-compose down || true
           docker-compose up -d --force-recreate
-        shell: bash
+        shell: C:\Program Files\Git\bin\bash.exe {0}
       - name: Smoke test (health)
         run: curl -f http://localhost:8000/health || exit 1
-        shell: bash
+        shell: C:\Program Files\Git\bin\bash.exe {0}
       - name: Smoke test (prediction)
         run: curl -f -X POST http://localhost:8000/predict -F "file=@data/raw/dog/dog.5.jpg" || exit 1
-        shell: bash
+        shell: C:\Program Files\Git\bin\bash.exe {0}
