@@ -84,3 +84,4 @@ async def root():
 # Trigger full CI/CD with self-hosted runner
 # final test after workflow fix
 # final test after workflow fix
+# test with cmd shell
