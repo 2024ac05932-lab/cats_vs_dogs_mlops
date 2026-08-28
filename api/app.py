@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from prometheus_fastapi_instrumentator import Instrumentator   # 👈 Add this import
 
-# Create the FastAPI app
+# Create the FastAPI app for Cats Vs Dogs
 app = FastAPI(title="Cats vs Dogs Classifier", version="1.0")
 
 # 👇 Add this line right after creating `app`
