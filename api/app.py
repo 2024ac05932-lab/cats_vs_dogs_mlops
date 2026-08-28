@@ -15,7 +15,7 @@ Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 # Rest of your code (model loading, endpoints, etc.)
 model = None
 MODEL_PATH = "models/cats_dogs_model.keras"
-# Its a Assignment task
+# Its a Assignment task for MLOPs
 def load_my_model():
     global model
     if os.path.exists(MODEL_PATH):
@@ -78,3 +78,4 @@ async def root():
             "/metrics": "Prometheus metrics"
         }
     }# Trigger CD
+# Trigger full CD
