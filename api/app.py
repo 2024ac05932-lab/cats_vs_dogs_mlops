@@ -82,3 +82,4 @@ async def root():
 # test after execution policy fix
 # test after runner service installed
 # Trigger full CI/CD with self-hosted runner
+# final test after workflow fix
