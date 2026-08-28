@@ -47,7 +47,7 @@ jobs:
             rajanvesangi/cats-dogs-classifier:latest
             rajanvesangi/cats-dogs-classifier:${{ github.sha }}
 
-  deploy:
+    deploy:
     needs: build
     runs-on: self-hosted
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -57,12 +57,12 @@ jobs:
       - name: Pull latest image and restart
         run: |
           docker pull rajanvesangi/cats-dogs-classifier:latest
-          docker-compose down || true
+          docker-compose down
           docker-compose up -d --force-recreate
-        shell: C:\Program Files\Git\bin\bash.exe {0}
+        shell: cmd
       - name: Smoke test (health)
         run: curl -f http://localhost:8000/health || exit 1
-        shell: C:\Program Files\Git\bin\bash.exe {0}
+        shell: cmd
       - name: Smoke test (prediction)
         run: curl -f -X POST http://localhost:8000/predict -F "file=@data/raw/dog/dog.5.jpg" || exit 1
-        shell: C:\Program Files\Git\bin\bash.exe {0}
+        shell: cmd
