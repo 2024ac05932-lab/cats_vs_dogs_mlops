@@ -1,4 +1,5 @@
 data/
+!data/*.dvc
 venv/
 *.zip
 *.h5
