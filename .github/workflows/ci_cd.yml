@@ -1,5 +1,23 @@
-- name: Smoke test (health)
-      shell: powershell
-      run: |
-        Start-Sleep -Seconds 10
-        curl.exe -f http://localhost:8000/health
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Pull latest image and restart
+        run: |
+          docker-compose down
+          docker-compose up -d --build
+
+      - name: Smoke test (health)
+        shell: powershell
+        run: |
+          Start-Sleep -Seconds 10
+          curl.exe -f http://localhost:8000/health
