@@ -5,3 +5,7 @@ fastapi
 uvicorn
 python-multipart
 pillow
+mlflow
+scikit-learn
+matplotlib
+seabornmlflow
