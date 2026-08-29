@@ -1,5 +1,5 @@
 prometheus-fastapi-instrumentator==6.1.0
-tensorflow==2.21.0
+tensorflow
 numpy
 fastapi
 uvicorn
@@ -8,4 +8,4 @@ pillow
 mlflow
 scikit-learn
 matplotlib
-seabornmlflow
+seaborn
